@@ -1,14 +1,10 @@
 package com.example.notepad
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.notepad.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,11 +20,17 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.title = "Your notes"
         setSupportActionBar(binding.toolbar)
 
-        binding.fab.setOnClickListener { view ->
-
+        binding.fab.setOnClickListener {
+            openAddNoteFragment()
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.container, FirstFragment()).commit()
+    }
+
+    private fun openAddNoteFragment() {
+        supportFragmentManager.beginTransaction().replace(R.id.container, AddNoteFragment()).addToBackStack(null).commit()
+        binding.fab.visibility = View.GONE
+        binding.toolbar.menu.clear()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         return when (item.itemId) {
             R.id.add -> {
-                //supportFragmentManager.beginTransaction().replace(R.id.container, AddNoteFragment()).commit()
+                openAddNoteFragment()
                 true
             }
             else -> super.onOptionsItemSelected(item)

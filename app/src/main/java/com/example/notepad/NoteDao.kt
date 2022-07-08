@@ -1,20 +1,20 @@
 package com.example.notepad
 
 import androidx.room.*
-import kotlinx.coroutines.flow.Flow
+import io.reactivex.Single
 
 @Dao
 interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addNote(note: Note)
+    fun addNote(note: Note)
 
     @Query("SELECT * FROM notes ORDER BY date DESC")
-    fun getNotes(): Flow<List<Note>>
+    fun getNotes(): Single<List<Note>>
 
     @Update
-    suspend fun updateNote(note: Note)
+    fun updateNote(note: Note)
 
     @Delete
-    suspend fun deleteNote(note: Note)
+    fun deleteNote(note: Note)
 }

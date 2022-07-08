@@ -36,6 +36,7 @@ abstract class NoteDatabase : RoomDatabase() {
                 NoteDatabase::class.java,
                 "notes_database"
             )
+                .allowMainThreadQueries()
                 .build()
         }
     }
