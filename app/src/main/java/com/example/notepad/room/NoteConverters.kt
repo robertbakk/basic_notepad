@@ -1,4 +1,4 @@
-package com.example.notepad
+package com.example.notepad.room
 
 import androidx.room.TypeConverter
 import java.util.*
